@@ -1,0 +1,93 @@
+Js validation
+html Page
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" inital-scale="1.0">
+    <title>Js Validation</title>
+  </head>
+  <body>
+    <form id="myForm">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username"><br><br>
+
+      <label for="dob">DOB:</label>
+      <input type="date" name="dob" id="dob"><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email"><br><br>
+
+      <label for="mobile">Mobile (+91):</label>
+      <input type="text" name="mobile" id="mobile"><br><br>
+
+      <label for="experience">Experience:</label>
+      <input type="number" name="experience" id="experience"><br><br>
+
+      <label for="url">Website:</label>
+      <input type="url" id="url" name="url"><br><br>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <p id="errorMessages" style="color:red;"></p>
+    <script>
+        document.getElementById("myForm").addEventListener("submit",function (event){
+            event.preventDefault();
+          
+            let errors = [];
+            
+            let username = document.getElementById("username").value;
+            if(!/^[A-Za-z]+$/.test(username)){
+                errors.push("Username Must be in Alphabets.");
+            }
+          
+            let dob = document.getElementById('dob').value;
+            if(!dob){
+              errors.push("Date of Birth is Required.");
+            }else{
+              let dobDate = new Date(dob);
+              let today = new Date();
+          
+              if(dobDate >= today){
+                errors.push("Date of Birth Must be in Past.");
+              }
+            }
+          
+            let email = document.getElementById('email').value;
+            if(!email){
+              errors.push("Email is Required.");
+            }else{
+              let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if(!emailPattern.test(email)){
+                errors.push("Invalid Email Address");
+              }
+            }
+          
+            let mobile = document.getElementById('mobile').value;
+            if(!/^\+91\d{10}$/.test(mobile)){
+                errors.push("Give the Correct Mobile Number.");
+            }
+          
+            let experience = document.getElementById('experience').value;
+            if(experience < 1 || experience > 51){
+              errors.push("Experience Must between in 1 to 50");
+            }
+          
+            let url = document.getElementById("url").value;
+            if(!/^(https:\/\/)?([^\s@]+@[^\s@]+\.)*[^\s@]+\.[^\s@]+$/.test(url)){
+              errors.push('Invalid URL.');
+            }
+          
+            let errorMessages = document.getElementById("errorMessages");
+            if(errors.length > 0){
+              errorMessages.innerHTML = errors.join("<br>");
+            }else{
+              alert("Form Submitted Successfully.");
+            }
+          })
+    </script>
+  </body>
+</html>
+
+

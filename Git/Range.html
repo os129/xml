@@ -1,0 +1,14 @@
+Enter a number : <input type="number" id="a">
+<input type="submit" onclick="abc()" value="Submit">
+<p id="v"></p>
+<script>
+  function abc() {
+    let num = document.getElementById("a").value
+    if (num >= 1 && num <= 999) {
+      document.getElementById("v").innerHTML = "Number within range";
+    }
+    else {
+      document.getElementById("v").innerHTML = "Number not in range";
+    }
+  }
+</script>

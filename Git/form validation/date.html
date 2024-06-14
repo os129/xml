@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Date Validation Form</title>
+</head>
+<body>
+    <h2>Date Validation Form</h2>
+    <form id="dateForm">
+        <label for="date">Enter a date (YYYY-MM-DD):</label><br>
+        <input type="text" id="date" name="date" placeholder="YYYY-MM-DD"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('dateForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting
+            validateDate();
+        });
+
+        function validateDate() {
+            const dateInput = document.getElementById('date').value;
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+            if (!datePattern.test(dateInput)) {
+                alert('Invalid date format. Please use YYYY-MM-DD.');
+                return;
+            }
+
+            const date = new Date(dateInput);
+            const [year, month, day] = dateInput.split('-').map(Number);
+
+            if (date.getFullYear() !== year || (date.getMonth() + 1) !== month || date.getDate() !== day) {
+                alert('Invalid date. Please enter a real date.');
+                return;
+            }
+
+            alert('Date is valid!');
+        }
+    </script>
+</body>
+</html>
+
+

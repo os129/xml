@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feedback Form</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>User Feedback Form</h2>
+    <form id="feedbackForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="feedback">Feedback:</label><br>
+        <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Submitted Feedback</h2>
+    <table id="feedbackTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault();  
+           
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('feedback').value;
+
+           
+            const table = document.getElementById('feedbackTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            const nameCell = newRow.insertCell(0);
+            const emailCell = newRow.insertCell(1);
+            const feedbackCell = newRow.insertCell(2);
+
+           
+            nameCell.textContent = name;
+            emailCell.textContent = email;
+            feedbackCell.textContent = feedback;
+
+            
+            document.getElementById('feedbackForm').reset();
+        });
+    </script>
+</body>
+</html>
